@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console
 {
-    internal class Program
+    public class Program
     {
         private IList<Item> Items;
 
