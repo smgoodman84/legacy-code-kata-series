@@ -28,12 +28,12 @@ namespace GildedRose.Console
                 }
             };
 
-            app.UpdateQuality(app.Items);
+            UpdateQuality(app.Items);
 
             System.Console.ReadKey();
         }
 
-        public void UpdateQuality(IList<Item> items)
+        public static void UpdateQuality(IList<Item> items)
         {
             for (var i = 0; i < items.Count; i++)
             {
