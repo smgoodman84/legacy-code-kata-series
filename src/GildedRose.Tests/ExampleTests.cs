@@ -95,5 +95,26 @@ namespace GildedRose.Tests
             var item = items.First();
             Assert.That(item.Quality, Is.EqualTo(expectedQuality));
         }
+
+        [TestCase(10, 8)]
+        [TestCase(9, 7)]
+        [TestCase(1, 0)]
+        public void ConjuredItemsDegradeAtDoubleSpeed(int quality, int expectedQuality)
+        {
+            var items = new List<Item>
+            {
+                new Item
+                {
+                    Name = "Conjured Mana Cake",
+                    Quality = quality,
+                    SellIn = 10
+                }
+            };
+
+            Program.UpdateQuality(items);
+
+            var item = items.First();
+            Assert.That(item.Quality, Is.EqualTo(expectedQuality));
+        }
     }
 }

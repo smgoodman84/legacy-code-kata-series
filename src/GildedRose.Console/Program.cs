@@ -46,6 +46,14 @@ namespace GildedRose.Console
                             items[i].Quality = items[i].Quality - 1;
                         }
                     }
+
+                    if (items[i].Quality > 0)
+                    {
+                        if (items[i].Name == "Conjured Mana Cake")
+                        {
+                            items[i].Quality = items[i].Quality - 1;
+                        }
+                    }
                 }
                 else
                 {
