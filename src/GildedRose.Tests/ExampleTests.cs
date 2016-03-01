@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using GildedRose.Console;
 using NUnit.Framework;
 
@@ -8,22 +6,23 @@ namespace GildedRose.Tests
 {
     public class ExampleTests
     {
+        private static void UpdateItem(Item item)
+        {
+            Program.UpdateQuality(new List<Item> {item});
+        }
+
         [Test]
         public void AgedBrieIncreasesInQuality()
         {
-            var items = new List<Item>
+            var item = new Item
             {
-                new Item
-                {
-                    Name = "Aged Brie",
-                    Quality = 10,
-                    SellIn = 5
-                }
+                Name = "Aged Brie",
+                Quality = 10,
+                SellIn = 5
             };
 
-            Program.UpdateQuality(items);
+            UpdateItem(item);
 
-            var item = items.First();
             Assert.That(item.Name, Is.EqualTo("Aged Brie"));
             Assert.That(item.Quality, Is.EqualTo(11));
             Assert.That(item.SellIn, Is.EqualTo(4));
@@ -34,19 +33,15 @@ namespace GildedRose.Tests
         [TestCase(51, 51)]
         public void AgedBrieDoesNotIncreaseInQualityAboveFifty(int quality, int expectedQuality)
         {
-            var items = new List<Item>
+            var item = new Item
             {
-                new Item
-                {
-                    Name = "Aged Brie",
-                    Quality = quality,
-                    SellIn = 5
-                }
+                Name = "Aged Brie",
+                Quality = quality,
+                SellIn = 5
             };
 
-            Program.UpdateQuality(items);
+            UpdateItem(item);
 
-            var item = items.First();
             Assert.That(item.Quality, Is.EqualTo(expectedQuality));
         }
 
@@ -58,19 +53,15 @@ namespace GildedRose.Tests
         [TestCase(4, 23)]
         public void BackstagePassQualityIncreaseWhenSellInDateApproaches(int sellIn, int expectedQuality)
         {
-            var items = new List<Item>
+            var item = new Item
             {
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    Quality = 20,
-                    SellIn = sellIn
-                }
+                Name = "Backstage passes to a TAFKAL80ETC concert",
+                Quality = 20,
+                SellIn = sellIn
             };
 
-            Program.UpdateQuality(items);
+            UpdateItem(item);
 
-            var item = items.First();
             Assert.That(item.Quality, Is.EqualTo(expectedQuality));
         }
 
@@ -80,19 +71,15 @@ namespace GildedRose.Tests
         [TestCase(-1, 0)]
         public void BackstagePassQualityDropsToZeroAfterSellInDate(int sellIn, int expectedQuality)
         {
-            var items = new List<Item>
+            var item = new Item
             {
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    Quality = 20,
-                    SellIn = sellIn
-                }
+                Name = "Backstage passes to a TAFKAL80ETC concert",
+                Quality = 20,
+                SellIn = sellIn
             };
 
-            Program.UpdateQuality(items);
+            UpdateItem(item);
 
-            var item = items.First();
             Assert.That(item.Quality, Is.EqualTo(expectedQuality));
         }
 
@@ -101,19 +88,15 @@ namespace GildedRose.Tests
         [TestCase(1, 0)]
         public void ConjuredItemsDegradeAtDoubleSpeed(int quality, int expectedQuality)
         {
-            var items = new List<Item>
+            var item = new Item
             {
-                new Item
-                {
-                    Name = "Conjured Mana Cake",
-                    Quality = quality,
-                    SellIn = 10
-                }
+                Name = "Conjured Mana Cake",
+                Quality = quality,
+                SellIn = 10
             };
 
-            Program.UpdateQuality(items);
+            UpdateItem(item);
 
-            var item = items.First();
             Assert.That(item.Quality, Is.EqualTo(expectedQuality));
         }
     }
