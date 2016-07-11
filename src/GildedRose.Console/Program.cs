@@ -33,7 +33,12 @@ namespace GildedRose.Console
                         SellIn = 15,
                         Quality = 20
                     },
-                    new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                    new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6},
+                    new Item {Name = "Merlot Red Wine", SellIn = 10, Quality = 0},
+                    new Item {Name = "Stilton", SellIn = 10, Quality = 0},
+                    new Item {Name = "Gruyere Cheese", SellIn = 10, Quality = 0},
+                    new Item {Name = "Cuban Cigars", SellIn = 0, Quality = 50},
+                    new Item(DateTime.Now.AddDays(7)) {Name = "Gourmet Dinner Tickets", Quality = 20}
                 }
             };
 
@@ -59,25 +64,34 @@ namespace GildedRose.Console
         {
             foreach (var item in items)
             {
-                if (item.Name == "Aged Brie")
+                switch (item.Name)
                 {
-                    UpdateAgeingItem(item);
-                }
-                else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    UpdateDesirableEventItem(item);
-                }
-                else if (item.Name == "Sulfuras, Hand of Ragnaros")
-                {
-                    UpdateLegendaryItem(item);
-                }
-                else if (item.Name == "Conjured Mana Cake")
-                {
-                    UpdateConjuredItem(item);
-                }
-                else
-                {
-                    UpdatePerishableItem(item);
+                    case "Aged Brie":
+                    case "Merlot Red Wine":
+                    case "Stilton":
+                    case "Gruyere Cheese":
+                        UpdateAgeingItem(item);
+                        break;
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                    case "Gourmet Dinner Tickets":
+                    case "Wine Tasting Workshop":
+                        UpdateDesirableEventItem(item);
+                        break;
+                    case "Sulfuras, Hand of Ragnaros":
+                    case "Cuban Cigars":
+                        UpdateLegendaryItem(item);
+                        break;
+                    case "Conjured Mana Cake":
+                        UpdateConjuredItem(item);
+                        break;
+                    case "+5 Dexterity Vest":
+                    case "Artichoke":
+                    case "Yoghurt":
+                    case "Elixir of the Mongoose":
+                        UpdatePerishableItem(item);
+                        break;
+                    default:
+                        throw new ArgumentException("Unknown item {0}", item.Name);
                 }
             }
         }

@@ -22,6 +22,11 @@ Elixir of the Mongoose|6|4
 Sulfuras, Hand of Ragnaros|80|0
 Backstage passes to a TAFKAL80ETC concert|21|14
 Conjured Mana Cake|4|2
+Merlot Red Wine|1|9
+Stilton|1|9
+Gruyere Cheese|1|9
+Cuban Cigars|50|0
+Gourmet Dinner Tickets|22|6
 ",
                 stringWriter.ToString());
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GildedRose.Console;
 using NUnit.Framework;
 
@@ -125,6 +126,13 @@ namespace GildedRose.Tests
 
             Assert.AreEqual(8, item.Quality);
             Assert.AreEqual(5, item.SellIn);
+        }
+
+        [Test]
+        public void DesirableItemWithDateHasCorrectSellIn()
+        {
+            var item = new Item(DateTime.Now.AddDays(1));
+            Assert.AreEqual(1, item.SellIn);
         }
 
         private void UpdateItem(Item item)
